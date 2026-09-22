@@ -1,27 +1,38 @@
 package bromelainraft
 
-type raft struct {
-	isLeader bool
-	myID     int
-	timer    time
+import "time"
+
+type Raft struct {
+	isLeader  bool
+	myID      int
+	timer     time.Time
+	nextIndex map[string]Command
 }
 
-type rpc struct {
+type Rpc struct {
 }
 
-type server struct {
+type Vote struct {
+	id   string
+	time time.Time
+}
+
+type Server struct {
 	id      string
 	address string
 }
 
-type config struct {
-	serverList []server
+type Config struct {
+	serverList []Server
 	total      int
+	seedVal    int
 }
 
-type command struct {
+type Command struct {
+	data     string
+	lampTime int
 }
 
-type log struct {
-	commandLog []command
+type Log struct {
+	commandLog []Command
 }
