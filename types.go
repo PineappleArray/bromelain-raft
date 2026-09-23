@@ -2,11 +2,23 @@ package bromelainraft
 
 import "time"
 
+type lState string
+
+const (
+	leader    lState = "leader"
+	follower  lState = "follower"
+	candidate lState = "candidate"
+)
+
 type Raft struct {
-	isLeader  bool
-	myID      int
-	timer     time.Time
-	nextIndex map[string]Command
+	leaderState lState
+	myID        int
+	timer       time.Time
+	nextIndex   map[string]Command
+	currentTerm int
+	votedFor    string
+	commitIndex int
+	lastApplied int
 }
 
 type Rpc struct {
