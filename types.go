@@ -1,6 +1,9 @@
 package bromelainraft
 
-import "time"
+import (
+	"sync"
+	"time"
+)
 
 type lState string
 
@@ -11,22 +14,31 @@ const (
 )
 
 type Raft struct {
-	leaderState lState
-	myID        int
+	mu          sync.Mutex
+	myID        string
 	timer       time.Time
-	nextIndex   map[string]Command
+	leaderState lState
+
+	// persistent state
 	currentTerm int
 	votedFor    string
-	commitIndex int
-	lastApplied int
+	log         Log
+
+	nextIndex  map[string]int
+	matchIndex map[string]int
+
+	config Config
 }
 
 type Rpc struct {
+	sender   string
+	reciever string
 }
 
 type Vote struct {
-	id   string
-	time time.Time
+	voterID     string
+	candidateID string
+	time        time.Time
 }
 
 type Server struct {

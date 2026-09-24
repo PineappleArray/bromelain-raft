@@ -7,3 +7,7 @@ type rpcResponse struct {
 
 type Response struct {
 }
+
+func (rpc *Rpc) requestVote(candidateID string, term int) {
+
+}
