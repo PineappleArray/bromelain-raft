@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// const state that each node can have
 type lState string
 
 const (
@@ -46,6 +47,7 @@ type Server struct {
 	address string
 }
 
+// contains a list of peers as well as the seed that starts vote
 type Config struct {
 	serverList []Server
 	total      int
@@ -57,6 +59,7 @@ type Command struct {
 	lampTime int
 }
 
+// log that contains the commands
 type Log struct {
 	commandLog []Command
 }
