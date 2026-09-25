@@ -20,18 +20,18 @@ const (
 )
 
 type Response struct {
-	status           StatusCode
-	playload         PayloadError
-	voteGranted      bool
-	successfulAppend bool
+	Status           StatusCode   `json:"Status"`
+	Payload          PayloadError `json:"Payload"`
+	VoteResponse     bool         `json:"VoteResponse"`
+	SuccessfulAppend bool         `json:"SuccessfulAppend"`
 }
 
 type VoteRequest struct {
-	candidateID string
-	term        int
-	logLen      int
-	entry       Command
-	recipientID string
+	CandidateID string  `json:"CandidateID"`
+	Term        int     `json:"Term"`
+	LogLen      int     `json:"LogLen"`
+	Entry       Command `json:"Entry"`
+	RecipientID string  `json:"RecipientID"`
 }
 
 type AppendRequest struct {
@@ -43,9 +43,9 @@ type AppendRequest struct {
 }
 
 func (rpc *Rpc) requestVote(request VoteRequest) Response {
-	return nil
+	return Response{}
 }
 
 func (rpc *Rpc) AppendEntry(request AppendRequest) Response {
-	return nil
+	return Response{}
 }
